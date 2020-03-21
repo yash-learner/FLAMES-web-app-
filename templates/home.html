@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Flames web App</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<script>
+function myFunction() {
+var first_name= $('#first_name').val();
+var second_name= $('#second_name').val();
+  $.ajax({
+              url: "/join",
+              type: "POST",
+              data: {first_name:first_name,
+              second_name:second_name}          }).done(function(response) {
+                    var html= "<br><br><br><p> <b> RESULT<> : <b><p>";
+                    response =response.result;
+                    $.each(response,function(key,val){
+                    console.log(val);
+                    html+="<p>"+val+"<p>"                
+                  });
+                html +="<br>";
+                $(".show-data").append(html);
+            });
+};
+</script>
+<body>
+      <p>
+        
+        <!--<font color="blue"><h1><i>Flames Game!</i></h1></font><br><br>-->
+        <div class="container-fluid headpart">
+  <div class="row">
+     <div class="col-xs-12 col-sm-12">
+       <h1 style="margin-left:20%" >Flames Game!</h1>
+     </div> 
+  </div>
+</div><
+        <marquee style="font-family:Times New Roman; color:white" bgcolor="red" scrolldelay="200"><font size=4>Know the relationship...</font></marquee><br><br>
+        FIRST_NAME <input type="text" id="first_name" name="first_name"><br><br>
+        SECOND_NAME<input type="text" id="second_name" name="second_name"><br><br>
+        <button  id="clicked" onclick="myFunction()">Submit</button>
+        </p>
+    <div class="show-data" ></div>
+
+</body>
+</html>
